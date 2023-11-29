@@ -5,6 +5,8 @@ VisualStudioVersion = 17.7.34024.191
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AnimeVerseAPI", "AnimeVerseAPI\AnimeVerseAPI.csproj", "{BE2AB486-1462-4581-A119-978094EBC86E}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AnimeVerse", "AnimeVerse\AnimeVerse.csproj", "{AFB409FB-1727-4B9B-B8A9-0AB2A04B8A4F}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{BE2AB486-1462-4581-A119-978094EBC86E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{BE2AB486-1462-4581-A119-978094EBC86E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{BE2AB486-1462-4581-A119-978094EBC86E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AFB409FB-1727-4B9B-B8A9-0AB2A04B8A4F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AFB409FB-1727-4B9B-B8A9-0AB2A04B8A4F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AFB409FB-1727-4B9B-B8A9-0AB2A04B8A4F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AFB409FB-1727-4B9B-B8A9-0AB2A04B8A4F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
