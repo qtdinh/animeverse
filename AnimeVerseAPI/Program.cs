@@ -1,12 +1,13 @@
 using AnimeVerse.Data;
 using Microsoft.EntityFrameworkCore;
+using AnimeVerse;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 
 builder.Services.AddControllers();
-builder.Services.AddDbContext<DataContext>(optionsAction: optionsBuilder => optionsBuilder.UseSqlServer(builder.Configuration.GetConnectionString(name: "DefaultConnection")));
+builder.Services.AddDbContext<AnimeVerseContext>(optionsAction: optionsBuilder => optionsBuilder.UseSqlServer(builder.Configuration.GetConnectionString(name: "DefaultConnection")));
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
