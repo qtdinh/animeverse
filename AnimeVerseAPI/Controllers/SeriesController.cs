@@ -1,5 +1,6 @@
 ﻿using AnimeVerse;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace AnimeVerseAPI.Controllers
 {
@@ -15,16 +16,15 @@ namespace AnimeVerseAPI.Controllers
         }
 
         [HttpGet]
-        public ActionResult<IEnumerable<Series>> GetSeries()
+        public async Task<ActionResult<IEnumerable<Series>>> GetSeries()
         {
-
-            return _context.Series.ToList();
+            return await _context.Series.ToListAsync();
         }
 
         [HttpGet("{id}")] // /api/series/2
-        public ActionResult<Series> GetSeries(int id)
+        public async Task<ActionResult<Series>> GetSeries(int id)
         {
-            return _context.Series.Find(id);
+            return await _context.Series.Find(id);
         }
     }
 }
