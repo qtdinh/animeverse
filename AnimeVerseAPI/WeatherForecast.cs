@@ -1,4 +1,4 @@
-namespace AnimeVerse
+namespace AnimeVerseAPI
 {
     public class WeatherForecast
     {
