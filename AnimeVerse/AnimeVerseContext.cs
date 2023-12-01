@@ -1,11 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
-using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.Options;
 
 namespace AnimeVerse;
 
-public partial class AnimeVerseContext : DbContext
+public partial class AnimeVerseContext : IdentityDbContext<AnimeVerseUser>
 {
     public AnimeVerseContext()
     {
@@ -26,6 +28,7 @@ public partial class AnimeVerseContext : DbContext
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
+        base.OnModelCreating(modelBuilder);
         modelBuilder.Entity<Character>(entity =>
         {
             entity.ToTable("Character");
