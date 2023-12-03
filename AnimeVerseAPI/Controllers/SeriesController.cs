@@ -1,4 +1,5 @@
 ﻿using AnimeVerse;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
@@ -16,12 +17,14 @@ namespace AnimeVerseAPI.Controllers
         }
 
         [HttpGet]
+        [Authorize]
         public async Task<ActionResult<IEnumerable<Series>>> GetSeries()
         {
             return await _context.Series.ToListAsync();
         }
 
         [HttpGet("{id}")] // /api/series/2
+        [Authorize]
         public async Task<ActionResult<Series>> GetSeries(int id)
         {
             return await _context.Series.FindAsync(id);
