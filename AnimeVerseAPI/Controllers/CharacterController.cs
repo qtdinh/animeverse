@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using AnimeVerse;
+using AnimeVerseAPI.DTOs;
 
 namespace AnimeVerseAPI.Controllers
 {
@@ -20,15 +21,23 @@ namespace AnimeVerseAPI.Controllers
             _context = context;
         }
 
-        // GET: api/Cities
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Character>>> GetCharacters()
+        public IEnumerable<CharacterDTO> GetCharacters()
         {
-            if (_context.Characters == null)
+            var characters = _context.Characters
+                .Include(c => c.SeriesItem) // Ensure SeriesItem is loaded
+                .ToList();
+
+            var characterDTOs = characters.Select(character => new CharacterDTO
             {
-                return NotFound();
-            }
-            return await _context.Characters.ToListAsync();
+                CharacterId = character.CharacterId,
+                Name = character.Name,
+                Age = character.Age,
+                Gender = character.Gender,
+                Series = character.SeriesItem.Title // Use only the title
+            });
+
+            return characterDTOs;
         }
 
         // GET: api/Characters/5
@@ -83,16 +92,16 @@ namespace AnimeVerseAPI.Controllers
         // POST: api/Characters
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
-        public async Task<ActionResult<Character>> PostCity(Character character)
+        public async Task<ActionResult<Character>> PostCharacter(Character character)
         {
             if (_context.Characters == null)
             {
-                return Problem("Entity set 'AnimeVerse.Characters'  is null.");
+                return Problem("Entity set 'AnimeVerse.Characters' is null.");
             }
             _context.Characters.Add(character);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction("GetCity", new { id = character.CharacterId }, character);
+            return CreatedAtAction("GetCharacter", new { id = character.CharacterId }, character);
         }
 
         // DELETE: api/Characters/5
