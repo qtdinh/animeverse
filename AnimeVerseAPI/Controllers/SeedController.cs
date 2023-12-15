@@ -96,6 +96,52 @@ namespace AnimeVerseAPI.Controllers
 
         }
 
+        [HttpPost("Characters")]
+        public async Task<IActionResult> ImportCharactersItemAsync()
+        {
+            // create a lookup dictionary containing all the series already existing 
+            // into the Database (it will be empty on first run).
+            Dictionary<string, Character> charactersByName = _db.Characters
+                .AsNoTracking().ToDictionary(x => x.Name, StringComparer.OrdinalIgnoreCase);
+
+            CsvConfiguration config = new(CultureInfo.InvariantCulture)
+            {
+                HasHeaderRecord = true,
+                HeaderValidated = null
+            };
+
+            using StreamReader reader = new(_pathName);
+            using CsvReader csv = new(reader, config);
+
+            List<AnimeVerseCsv> records = csv.GetRecords<AnimeVerseCsv>().ToList();
+            foreach (AnimeVerseCsv record in records)
+            {
+                int seriesId = _db.Series
+                    .Where(s => s.Title == record.seriesItem)
+                    .Select(s => s.SeriesId)
+                    .FirstOrDefault();
+                if (charactersByName.ContainsKey(record.character))
+                {
+                    continue;
+                }
+
+                Character character = new()
+                {
+                    Name = record.character,
+                    Age = record.age,
+                    Gender = record.gender,
+                    SeriesId = seriesId
+                };
+                await _db.Characters.AddAsync(character);
+                charactersByName.Add(record.character, character);
+            }
+
+            await _db.SaveChangesAsync();
+
+            return new JsonResult(charactersByName.Count);
+
+        }
+
         [HttpPost("Genres")]
         public async Task<IActionResult> ImportGenresAsync()
         {

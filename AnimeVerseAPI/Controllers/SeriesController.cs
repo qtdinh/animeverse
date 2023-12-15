@@ -18,9 +18,23 @@ namespace AnimeVerseAPI.Controllers
         }
 
         [HttpGet]
-        public IEnumerable<SeriesItem> GetSeries()
+        public IEnumerable<SeriesDTO> GetSeries()
         {
-            return _context.Series.ToList();
+            var seriesWithGenres = _context.Series
+                .Include(s => s.SeriesGenres)
+                .ThenInclude(sg => sg.Genre)
+            .ToList();
+
+            var seriesDtos = seriesWithGenres.Select(series => new SeriesDTO
+            {
+                SeriesId = series.SeriesId,
+                Title = series.Title,
+                Demographic = series.Demographic,
+                Year = series.Year,
+                Genres = series.SeriesGenres.Select(sg => sg.Genre.Name)
+            });
+
+            return seriesDtos;
         }
 
         // GET api/<CountriesController>/5
