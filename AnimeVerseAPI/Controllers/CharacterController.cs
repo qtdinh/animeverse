@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using AnimeVerse;
 using AnimeVerseAPI.DTOs;
+using Microsoft.AspNetCore.Authorization;
 
 namespace AnimeVerseAPI.Controllers
 {
@@ -22,6 +23,7 @@ namespace AnimeVerseAPI.Controllers
         }
 
         [HttpGet]
+        [Authorize]
         public IEnumerable<CharacterDTO> GetCharacters()
         {
             var characters = _context.Characters
@@ -42,6 +44,7 @@ namespace AnimeVerseAPI.Controllers
 
         // GET: api/Characters/5
         [HttpGet("{id}")]
+
         public async Task<ActionResult<Character>> GetCharacter(int id)
         {
             if (_context.Characters == null)
