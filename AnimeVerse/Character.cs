@@ -25,9 +25,6 @@ public partial class Character
 
     public int SeriesId { get; set; }
 
-    [StringLength(50)]
-    [Unicode(false)]
-
     [ForeignKey("SeriesId")]
     [InverseProperty("Characters")]
     public virtual SeriesItem SeriesItem { get; set; } = null!;

@@ -39,7 +39,7 @@ public partial class AnimeVerseContext : IdentityDbContext<AnimeVerseUser>
         base.OnModelCreating(modelBuilder);
         modelBuilder.Entity<Character>(entity =>
         {
-            entity.ToTable("Character");
+            entity.ToTable("Characters");
 
             entity.Property(e => e.CharacterId)
                 .ValueGeneratedOnAdd()
