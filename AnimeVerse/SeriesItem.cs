@@ -24,6 +24,8 @@ public partial class SeriesItem
 
     [InverseProperty("SeriesItem")]
     public virtual ICollection<Character> Characters { get; set; } = new List<Character>();
-    public ICollection<SeriesGenre> SeriesGenres { get; set; } = new List<SeriesGenre>();
+
+    [InverseProperty("Series")]
+    public virtual ICollection<SeriesGenre> SeriesGenres { get; set; } = new List<SeriesGenre>();
 
 }

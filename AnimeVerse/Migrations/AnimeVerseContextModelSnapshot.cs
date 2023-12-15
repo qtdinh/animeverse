@@ -138,7 +138,7 @@ namespace AnimeVerse.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Genres");
+                    b.ToTable("Genres", (string)null);
                 });
 
             modelBuilder.Entity("AnimeVerse.SeriesGenre", b =>
@@ -153,7 +153,7 @@ namespace AnimeVerse.Migrations
 
                     b.HasIndex("GenreId");
 
-                    b.ToTable("SeriesGenres");
+                    b.ToTable("SeriesGenres", (string)null);
                 });
 
             modelBuilder.Entity("AnimeVerse.SeriesItem", b =>
@@ -182,7 +182,7 @@ namespace AnimeVerse.Migrations
 
                     b.HasKey("SeriesId");
 
-                    b.ToTable("Series");
+                    b.ToTable("Series", (string)null);
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
