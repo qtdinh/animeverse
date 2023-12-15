@@ -158,15 +158,14 @@ namespace AnimeVerseAPI.Controllers
 
             using StreamReader reader = new(_pathName);
             using CsvReader csv = new(reader, config);
-
             List<AnimeVerseCsv> records = csv.GetRecords<AnimeVerseCsv>().ToList();
+
             foreach (AnimeVerseCsv record in records)
             {
-
                 int seriesId = _db.Series
-                .Where(s => s.Title == record.seriesItem)
-                .Select(s => s.SeriesId)
-                .FirstOrDefault();
+                    .Where(s => s.Title == record.seriesItem)
+                    .Select(s => s.SeriesId)
+                    .FirstOrDefault();
 
                 foreach (string genreName in record.genres.Split(','))
                 {
@@ -181,23 +180,35 @@ namespace AnimeVerseAPI.Controllers
                     if (!genresByName.ContainsKey(trimmedGenreName))
                     {
                         await _db.Genres.AddAsync(genreItem);
+                        await _db.SaveChangesAsync(); // Wait for the Genre to be added
                         genresByName.Add(trimmedGenreName, genreItem);
                     }
 
-                    // Create SeriesGenre
-                    SeriesGenre seriesGenre = new SeriesGenre
+                    // Check if the SeriesGenre already exists in the database
+                    SeriesGenre existingSeriesGenre = _db.SeriesGenres
+                        .AsNoTracking()
+                        .FirstOrDefault(sg => sg.SeriesId == seriesId && sg.GenreId == genreItem.Id);
+
+                    if (existingSeriesGenre == null)
                     {
-                        SeriesId = seriesId,
-                        GenreId = genreItem.Id // Use the ID of the genre
-                    };
+                        // Create a new SeriesGenre for each iteration
+                        SeriesGenre seriesGenre = new SeriesGenre
+                        {
+                            SeriesId = seriesId,
+                            GenreId = genreItem.Id // Use the ID of the genre
+                        };
 
-                    await _db.SeriesGenres.AddAsync(seriesGenre);
+                        // Check if the SeriesGenre is already being tracked
+                        SeriesGenre trackedSeriesGenre = _db.SeriesGenres
+                            .Local
+                            .FirstOrDefault(sg => sg.SeriesId == seriesId && sg.GenreId == genreItem.Id);
 
-                    // Detach the entities to prevent tracking issues
-                    _db.Entry(genreItem).State = EntityState.Detached;
-                    _db.Entry(seriesGenre).State = EntityState.Detached;
+                        if (trackedSeriesGenre == null)
+                        {
+                            await _db.SeriesGenres.AddAsync(seriesGenre);
+                        }
+                    }
                 }
-
             }
 
             // Save changes once, outside the loop
@@ -205,7 +216,5 @@ namespace AnimeVerseAPI.Controllers
 
             return new JsonResult(genresByName.Count);
         }
-
-
     }
 }
