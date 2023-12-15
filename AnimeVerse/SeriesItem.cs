@@ -17,6 +17,7 @@ public partial class SeriesItem
     [Unicode(false)]
     public string Title { get; set; } = null!;
 
+    public string Demographic { get; set; } = null!;
     public int Year { get; set; }
 
     [InverseProperty("SeriesItem")]
