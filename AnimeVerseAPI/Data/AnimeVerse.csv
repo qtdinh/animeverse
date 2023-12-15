@@ -1,0 +1,46 @@
+series,character,gender,year,age,genres,demographic,id
+Naruto,Naruto Uzumaki,male,1999,16,"adventure,fantasy comedy,martial arts",shonen,1
+Dragon Ball Z,Son Goku,male,1984,23,"adventure,fantasy,martial arts",shonen,2
+One Piece,Monkey D. Luffy,male,1997,19,"adventure,science fantasy",shonen,3
+Bleach,Ichigo Kurosaki,male,2001,15,"adventure,martial arts,supernatural",shonen,4
+Chiikawa,Chiikawa,unknown,2020,,"slice of life,comedy",seinen,5
+Hunter X Hunter,Gon Freecss,male,1998,12,"adventure,fantasy,martial arts",shonen,6
+Fullmetal Alchemist,Edward Elric,male,2001,16,"adventure,dark fantasy,steampunk",shonen,7
+Monster,Kenzo Tenma,male,1994,28,"crime,mystery,psychological thriller",seinen,8
+Cowboy Bebop,Spike Spiegel,male,1998,27,"neo-noir,space western",shoujo,9
+Hajime no Ippo,Ippo Makunouchi,male,1989,19,"action,comedy,sports",shonen,10
+Mob Psycho 100,Shigeo Kageyama,male,2012,14,"action,comedy,supernatural",shonen,11
+One-Punch Man,Saitama,male,2009,25,"action,comedy,superhero",seinen,12
+Jojo's Bizarre Adventure,Jotaro Kujo,male,1987,17,"adventure,supernatural",seinen,13
+Neon Genesis Evangelion,Shinji Ikari,male,1995,14,"apocalyptic,mecha,psychological drama",seinen,14
+Legend of the Galactic Heroes,Yang Wenli,male,1988,28,"military science fiction,space opera",seinen,15
+Naruto,Sasuke Uchiha,male,1999,16,"adventure,fantasy comedy,martial arts",shonen,16
+Dragon Ball Z,Krillin,male,1984,26,"adventure,fantasy,martial arts",shonen,17
+One Piece,Roronoa Zoro,male,1997,19,"adventure,science fantasy",shonen,18
+Bleach,Rukia Kuchiki,female,2001,150,"adventure,martial arts,supernatural",shonen,19
+Chiikawa,Hachiware,unknown,2020,,"slice of life,comedy",seinen,20
+Hunter X Hunter,Killua Zoldyck,male,1998,12,"adventure,fantasy,martial arts",shonen,21
+Fullmetal Alchemist,Alphonse Elric,male,2001,14,"adventure,dark fantasy,steampunk",shonen,22
+Monster,Heinrich Lunge,male,1994,35,"crime,mystery,psychological thriller",seinen,23
+Cowboy Bebop,Faye Valentine,female,1998,23,"neo-noir,space western",shoujo,24
+Hajime no Ippo,Miyata Ichiro,male,1989,19,"action,comedy,sports",shonen,25
+Mob Psycho 100,Reigen Arataka,male,2012,28,"action,comedy,supernatural",shonen,26
+One-Punch Man,Genos,male,2009,19,"action,comedy,superhero",seinen,27
+Jojo's Bizarre Adventure,Jolyne Cujoh,female,1987,19,"adventure,supernatural",seinen,28
+Neon Genesis Evangelion,Asuka Langley Soryu,female,1995,14,"apocalyptic,mecha,psychological drama",seinen,29
+Legend of the Galactic Heroes,Reinhard von Lohengramm,male,1988,20,"military science fiction,space opera",seinen,30
+Naruto,Sakura Haruno,female,1999,15,"adventure,fantasy comedy,martial arts",shonen,31
+Dragon Ball Z,Vegeta,male,1984,30,"adventure,fantasy,martial arts",shonen,32
+One Piece,Nico Robin,female,1997,28,"adventure,science fantasy",shonen,33
+Bleach,Ishida Uryu,male,2001,15,"adventure,martial arts,supernatural",shonen,34
+Chiikawa,Usagi,unknown,2020,,"slice of life,comedy",seinen,35
+Hunter X Hunter,Kurapika,male,1998,17,"adventure,fantasy,martial arts",shonen,36
+Fullmetal Alchemist,Winry Rockbell,female,2001,15,"adventure,dark fantasy,steampunk",shonen,37
+Monster,Johan Liebert,male,1994,19,"crime,mystery,psychological thriller",seinen,38
+Cowboy Bebop,Edward Wong,female,1998,13,"neo-noir,space western",shoujo,39
+Hajime no Ippo,Takamura Mamoru,male,1989,23,"action,comedy,sports",shonen,40
+Mob Psycho 100,Dimple,male,2012,,"action,comedy,supernatural",shonen,41
+One-Punch Man,Tatsumaki,female,2009,28,"action,comedy,superhero",seinen,42
+Jojo's Bizarre Adventure,Dio Brando,male,1987,122,"adventure,supernatural",seinen,43
+Neon Genesis Evangelion,Rei Ayanami,female,1995,14,"apocalyptic,mecha,psychological drama",seinen,44
+Legend of the Galactic Heroes,Paul von Oberstein,male,1988,36,"military science fiction,space opera",seinen,45

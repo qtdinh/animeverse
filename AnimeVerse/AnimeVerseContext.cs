@@ -21,6 +21,7 @@ public partial class AnimeVerseContext : IdentityDbContext<AnimeVerseUser>
     public virtual DbSet<Character> Characters { get; set; }
     public virtual DbSet<SeriesItem> Series { get; set; }
     public DbSet<Genre> Genres { get; set; }
+    public DbSet<SeriesGenre> SeriesGenres { get; set; }
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
@@ -65,6 +66,19 @@ public partial class AnimeVerseContext : IdentityDbContext<AnimeVerseUser>
                     .HasConstraintName("FK_Characters_Series");
             });
         });
+
+        modelBuilder.Entity<SeriesGenre>()
+        .HasKey(sg => new { sg.SeriesId, sg.GenreId });
+
+            modelBuilder.Entity<SeriesGenre>()
+                .HasOne(sg => sg.Series)
+                .WithMany(s => s.SeriesGenres)
+                .HasForeignKey(sg => sg.SeriesId);
+
+            modelBuilder.Entity<SeriesGenre>()
+                .HasOne(sg => sg.Genre)
+                .WithMany(g => g.SeriesGenres)
+                .HasForeignKey(sg => sg.GenreId);
 
         OnModelCreatingPartial(modelBuilder);
     }

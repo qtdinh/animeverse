@@ -27,7 +27,6 @@ public partial class Character
 
     [StringLength(50)]
     [Unicode(false)]
-    public string Demographic { get; set; } = null!;
 
     [ForeignKey("SeriesId")]
     [InverseProperty("Characters")]
