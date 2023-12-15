@@ -51,34 +51,34 @@ public partial class AnimeVerseContext : IdentityDbContext<AnimeVerseUser>
                 .HasMaxLength(55)
                 .IsUnicode(false);
             entity.Property(e => e.SeriesId).HasColumnName("SeriesID");
+
+            entity.HasOne(d => d.SeriesItem).WithMany(p => p.Characters)
+                   .OnDelete(DeleteBehavior.ClientSetNull)
+                   .HasConstraintName("FK_Characters_Series");
         });
 
         modelBuilder.Entity<SeriesItem>(entity =>
         {
-            entity.Property(e => e.SeriesId).HasColumnName("SeriesID");
+            entity.Property(e => e.SeriesId).HasColumnName("ID");
             entity.Property(e => e.Title)
                 .HasMaxLength(255)
                 .IsUnicode(false);
-            modelBuilder.Entity<Character>(entity =>
-            {
-                entity.HasOne(d => d.SeriesItem).WithMany(p => p.Characters)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_Characters_Series");
-            });
         });
 
+
         modelBuilder.Entity<SeriesGenre>()
-        .HasKey(sg => new { sg.SeriesId, sg.GenreId });
+            .HasKey(sg => new { sg.SeriesId, sg.GenreId });
 
-            modelBuilder.Entity<SeriesGenre>()
-                .HasOne(sg => sg.Series)
-                .WithMany(s => s.SeriesGenres)
-                .HasForeignKey(sg => sg.SeriesId);
+        modelBuilder.Entity<SeriesGenre>()
+            .HasOne(sg => sg.Series)
+            .WithMany(s => s.SeriesGenres)
+            .HasForeignKey(sg => sg.SeriesId);
 
-            modelBuilder.Entity<SeriesGenre>()
-                .HasOne(sg => sg.Genre)
-                .WithMany(g => g.SeriesGenres)
-                .HasForeignKey(sg => sg.GenreId);
+        modelBuilder.Entity<SeriesGenre>()
+            .HasOne(sg => sg.Genre)
+            .WithMany(g => g.SeriesGenres)
+            .HasForeignKey(sg => sg.GenreId);
+
 
         OnModelCreatingPartial(modelBuilder);
     }

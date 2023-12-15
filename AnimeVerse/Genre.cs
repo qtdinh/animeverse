@@ -15,5 +15,6 @@ public class Genre
     [StringLength(255)]
     public string Name { get; set; }
 
+    [InverseProperty("Genre")]
     public ICollection<SeriesGenre> SeriesGenres { get; set; } = new List<SeriesGenre>();
 }

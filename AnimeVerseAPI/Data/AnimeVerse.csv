@@ -1,4 +1,4 @@
-series,character,gender,year,age,genres,demographic,id
+seriesItem,character,gender,year,age,genres,demographic,id
 Naruto,Naruto Uzumaki,male,1999,16,"adventure,fantasy comedy,martial arts",shonen,1
 Dragon Ball Z,Son Goku,male,1984,23,"adventure,fantasy,martial arts",shonen,2
 One Piece,Monkey D. Luffy,male,1997,19,"adventure,science fantasy",shonen,3
