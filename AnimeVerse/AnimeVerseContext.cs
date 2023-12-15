@@ -19,9 +19,8 @@ public partial class AnimeVerseContext : IdentityDbContext<AnimeVerseUser>
     }
 
     public virtual DbSet<Character> Characters { get; set; }
+
     public virtual DbSet<SeriesItem> Series { get; set; }
-    public DbSet<Genre> Genres { get; set; }
-    public DbSet<SeriesGenre> SeriesGenres { get; set; }
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
@@ -51,18 +50,20 @@ public partial class AnimeVerseContext : IdentityDbContext<AnimeVerseUser>
                 .HasMaxLength(55)
                 .IsUnicode(false);
             entity.Property(e => e.SeriesId).HasColumnName("SeriesID");
-
-            entity.HasOne(d => d.SeriesItem).WithMany(p => p.Characters)
-                   .OnDelete(DeleteBehavior.ClientSetNull)
-                   .HasConstraintName("FK_Characters_Series");
         });
 
         modelBuilder.Entity<SeriesItem>(entity =>
         {
-            entity.Property(e => e.SeriesId).HasColumnName("ID");
+            entity.Property(e => e.SeriesId).HasColumnName("SeriesID");
             entity.Property(e => e.Title)
                 .HasMaxLength(255)
                 .IsUnicode(false);
+            modelBuilder.Entity<Character>(entity =>
+            {
+                entity.HasOne(d => d.SeriesItem).WithMany(p => p.Characters)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_Characters_Series");
+            });
         });
 
 

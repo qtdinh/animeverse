@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Diagnostics.Metrics;
 using Microsoft.EntityFrameworkCore;
 namespace AnimeVerse;
 
@@ -23,6 +24,10 @@ public partial class Character
     public string Gender { get; set; } = null!;
 
     public int SeriesId { get; set; }
+
+    [StringLength(50)]
+    [Unicode(false)]
+    public string Demographic { get; set; } = null!;
 
     [ForeignKey("SeriesId")]
     [InverseProperty("Characters")]

@@ -18,7 +18,7 @@ namespace AnimeVerseAPI.Controllers
         }
 
         [HttpGet]
-        public IEnumerable<Series> GetSeries()
+        public IEnumerable<SeriesItem> GetSeries()
         {
             return _context.Series.ToList();
         }
