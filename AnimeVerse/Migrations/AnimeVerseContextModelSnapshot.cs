@@ -148,7 +148,7 @@ namespace AnimeVerse.Migrations
 
                     b.HasKey("SeriesId");
 
-                    b.ToTable("Series");
+                    b.ToTable("Series", (string)null);
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>

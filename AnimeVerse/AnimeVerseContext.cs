@@ -20,7 +20,7 @@ public partial class AnimeVerseContext : IdentityDbContext<AnimeVerseUser>
 
     public virtual DbSet<Character> Characters { get; set; }
 
-    public virtual DbSet<Series> Series { get; set; }
+    public virtual DbSet<SeriesItem> Series { get; set; }
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
@@ -42,8 +42,7 @@ public partial class AnimeVerseContext : IdentityDbContext<AnimeVerseUser>
 
             entity.Property(e => e.CharacterId)
                 .ValueGeneratedOnAdd()
-                .HasColumnName("CharacterID");
-            entity.Property(e => e.Description).HasColumnType("text");
+                .HasColumnName("ID");
             entity.Property(e => e.Gender)
                 .HasMaxLength(10)
                 .IsUnicode(false);
@@ -51,22 +50,20 @@ public partial class AnimeVerseContext : IdentityDbContext<AnimeVerseUser>
                 .HasMaxLength(55)
                 .IsUnicode(false);
             entity.Property(e => e.SeriesId).HasColumnName("SeriesID");
-
-            entity.HasOne(d => d.CharacterNavigation).WithOne(p => p.Character)
-                .HasForeignKey<Character>(d => d.CharacterId)
-                .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK_Character_Series");
         });
 
-        modelBuilder.Entity<Series>(entity =>
+        modelBuilder.Entity<SeriesItem>(entity =>
         {
             entity.Property(e => e.SeriesId).HasColumnName("SeriesID");
-            entity.Property(e => e.Genre)
-                .HasMaxLength(50)
-                .IsUnicode(false);
             entity.Property(e => e.Title)
                 .HasMaxLength(255)
                 .IsUnicode(false);
+            modelBuilder.Entity<Character>(entity =>
+            {
+                entity.HasOne(d => d.SeriesItem).WithMany(p => p.Characters)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_Characters_Series");
+            });
         });
 
         OnModelCreatingPartial(modelBuilder);

@@ -43,14 +43,14 @@ namespace AnimeVerse.Migrations
             migrationBuilder.AddColumn<string>(
                 name: "genre",
                 table: "Series",
-                type: "string",
+                type: "varchar(50)",
                 nullable: false,
                 defaultValue: "");
 
             migrationBuilder.AddColumn<string>(
                 name: "description",
                 table: "Character",
-                type: "string",
+                type: "varchar(50)",
                 nullable: false,
                 defaultValue: "");
         }

@@ -18,7 +18,7 @@ namespace AnimeVerseAPI.Controllers
 
         [HttpGet]
         [Authorize]
-        public async Task<ActionResult<IEnumerable<Series>>> GetSeries()
+        public IEnumerable<SeriesItem> GetSeries()
         {
             return await _context.Series.ToListAsync();
         }
