@@ -18,29 +18,13 @@ namespace AnimeVerseAPI.Controllers
         }
 
         [HttpGet]
-        [Authorize]
-        public IEnumerable<SeriesDTO> GetSeries()
+        public IEnumerable<Series> GetSeries()
         {
-            var seriesWithGenres = _context.Series
-                .Include(s => s.SeriesGenres)
-                .ThenInclude(sg => sg.Genre)
-            .ToList();
-
-            var seriesDtos = seriesWithGenres.Select(series => new SeriesDTO
-            {
-                SeriesId = series.SeriesId,
-                Title = series.Title,
-                Demographic = series.Demographic,
-                Year = series.Year,
-                Genres = series.SeriesGenres.Select(sg => sg.Genre.Name)
-            });
-
-            return seriesDtos;
+            return _context.Series.ToList();
         }
 
         // GET api/<CountriesController>/5
         [HttpGet(template: "{id}")]
-        [Authorize]
         public string Get(int id)
         {
             return "value";
@@ -62,7 +46,7 @@ namespace AnimeVerseAPI.Controllers
         [HttpDelete("{id}")]
         public void Delete(int id)
         {
-            return await _context.Series.FindAsync(id);
         }
     }
 }
+

@@ -4,6 +4,7 @@ using AnimeVerse;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace AnimeVerse.Migrations
 {
     [DbContext(typeof(AnimeVerseContext))]
-    partial class AnimeVerseContextModelSnapshot : ModelSnapshot
+    [Migration("20231215022147_RenameID")]
+    partial class RenameID
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -92,12 +95,14 @@ namespace AnimeVerse.Migrations
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
-                        .HasColumnName("ID");
+                        .HasColumnName("CharacterID");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("CharacterId"));
-
-                    b.Property<int?>("Age")
+                    b.Property<int>("Age")
                         .HasColumnType("int");
+
+                    b.Property<string>("Description")
+                        .IsRequired()
+                        .HasColumnType("text");
 
                     b.Property<string>("Gender")
                         .IsRequired()
@@ -117,46 +122,10 @@ namespace AnimeVerse.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("SeriesId");
-
                     b.ToTable("Character", (string)null);
                 });
 
-            modelBuilder.Entity("AnimeVerse.Genre", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasColumnName("ID");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasMaxLength(255)
-                        .HasColumnType("nvarchar(255)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Genres", (string)null);
-                });
-
-            modelBuilder.Entity("AnimeVerse.SeriesGenre", b =>
-                {
-                    b.Property<int>("SeriesId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("GenreId")
-                        .HasColumnType("int");
-
-                    b.HasKey("SeriesId", "GenreId");
-
-                    b.HasIndex("GenreId");
-
-                    b.ToTable("SeriesGenres", (string)null);
-                });
-
-            modelBuilder.Entity("AnimeVerse.SeriesItem", b =>
+            modelBuilder.Entity("AnimeVerse.Series", b =>
                 {
                     b.Property<int>("SeriesId")
                         .ValueGeneratedOnAdd()
@@ -165,11 +134,11 @@ namespace AnimeVerse.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("SeriesId"));
 
-                    b.Property<string>("Demographic")
+                    b.Property<string>("Genre")
                         .IsRequired()
-                        .HasMaxLength(255)
+                        .HasMaxLength(50)
                         .IsUnicode(false)
-                        .HasColumnType("varchar(255)");
+                        .HasColumnType("varchar(50)");
 
                     b.Property<string>("Title")
                         .IsRequired()
@@ -182,7 +151,7 @@ namespace AnimeVerse.Migrations
 
                     b.HasKey("SeriesId");
 
-                    b.ToTable("Series", (string)null);
+                    b.ToTable("Series");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
@@ -324,28 +293,9 @@ namespace AnimeVerse.Migrations
                         .WithOne("Character")
                         .HasForeignKey("AnimeVerse.Character", "Id")
                         .IsRequired()
-                        .HasConstraintName("FK_Characters_Series");
+                        .HasConstraintName("FK_Character_Series");
 
-                    b.Navigation("SeriesItem");
-                });
-
-            modelBuilder.Entity("AnimeVerse.SeriesGenre", b =>
-                {
-                    b.HasOne("AnimeVerse.Genre", "Genre")
-                        .WithMany("SeriesGenres")
-                        .HasForeignKey("GenreId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("AnimeVerse.SeriesItem", "Series")
-                        .WithMany("SeriesGenres")
-                        .HasForeignKey("SeriesId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Genre");
-
-                    b.Navigation("Series");
+                    b.Navigation("CharacterNavigation");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -399,16 +349,9 @@ namespace AnimeVerse.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("AnimeVerse.Genre", b =>
+            modelBuilder.Entity("AnimeVerse.Series", b =>
                 {
-                    b.Navigation("SeriesGenres");
-                });
-
-            modelBuilder.Entity("AnimeVerse.SeriesItem", b =>
-                {
-                    b.Navigation("Characters");
-
-                    b.Navigation("SeriesGenres");
+                    b.Navigation("Character");
                 });
 #pragma warning restore 612, 618
         }
