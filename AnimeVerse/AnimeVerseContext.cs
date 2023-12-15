@@ -19,8 +19,8 @@ public partial class AnimeVerseContext : IdentityDbContext<AnimeVerseUser>
     }
 
     public virtual DbSet<Character> Characters { get; set; }
-
     public virtual DbSet<SeriesItem> Series { get; set; }
+    public DbSet<Genre> Genres { get; set; }
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
