@@ -89,7 +89,7 @@ namespace AnimeVerse.Migrations
 
             modelBuilder.Entity("AnimeVerse.Character", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<int>("CharacterId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasColumnName("ID");
@@ -115,7 +115,7 @@ namespace AnimeVerse.Migrations
                         .HasColumnType("int")
                         .HasColumnName("SeriesID");
 
-                    b.HasKey("Id");
+                    b.HasKey("CharacterId");
 
                     b.HasIndex("SeriesId");
 
@@ -322,7 +322,7 @@ namespace AnimeVerse.Migrations
                 {
                     b.HasOne("AnimeVerse.Series", "CharacterNavigation")
                         .WithOne("Character")
-                        .HasForeignKey("AnimeVerse.Character", "Id")
+                        .HasForeignKey("AnimeVerse.Character", "CharacterId")
                         .IsRequired()
                         .HasConstraintName("FK_Characters_Series");
 
