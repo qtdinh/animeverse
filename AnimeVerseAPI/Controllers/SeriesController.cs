@@ -18,6 +18,7 @@ namespace AnimeVerseAPI.Controllers
         }
 
         [HttpGet]
+        [Authorize]
         public IEnumerable<SeriesDTO> GetSeries()
         {
             var seriesWithGenres = _context.Series
@@ -39,6 +40,7 @@ namespace AnimeVerseAPI.Controllers
 
         // GET api/<CountriesController>/5
         [HttpGet(template: "{id}")]
+        [Authorize]
         public string Get(int id)
         {
             return "value";
