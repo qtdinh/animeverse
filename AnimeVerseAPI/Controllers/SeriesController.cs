@@ -62,7 +62,7 @@ namespace AnimeVerseAPI.Controllers
         [HttpDelete("{id}")]
         public void Delete(int id)
         {
+            return await _context.Series.FindAsync(id);
         }
     }
 }
-
