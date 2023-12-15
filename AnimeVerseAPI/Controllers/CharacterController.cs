@@ -7,7 +7,6 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using AnimeVerse;
 using AnimeVerseAPI.DTOs;
-using Microsoft.AspNetCore.Authorization;
 
 namespace AnimeVerseAPI.Controllers
 {
@@ -23,7 +22,6 @@ namespace AnimeVerseAPI.Controllers
         }
 
         [HttpGet]
-        [Authorize]
         public IEnumerable<CharacterDTO> GetCharacters()
         {
             var characters = _context.Characters
